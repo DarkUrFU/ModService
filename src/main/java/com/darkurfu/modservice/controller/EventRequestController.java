@@ -15,8 +15,4 @@ public class EventRequestController {
     @Autowired
     private EventRequestService eventRequestService;
 
-    @GetMapping("/")
-    List<Moderator> getMod(){
-        return eventRequestService.getMods();
-    }
 }

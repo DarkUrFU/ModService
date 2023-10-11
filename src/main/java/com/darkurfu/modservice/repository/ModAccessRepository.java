@@ -8,6 +8,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ModAccessRepository extends JpaRepository<ModeratorAccess, Long> {
 
-    @Query("select ")
-    short getAccessFor(String chatId, String service);
+    @Query("select ma.modService from moderator_access ma where ma.id = ?1 ")
+    short getAccessModServiceFor(
+            Long id
+    );
+
+    @Query("select ma.eventService from moderator_access ma where ma.id = ?1 ")
+    short getAccessEventServiceFor(
+            Long id
+    );
 }

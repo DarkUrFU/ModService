@@ -15,6 +15,7 @@ public class ModeratorAccess {
     private short modService;
     @Column(name = "event_service")
     private short eventService;
+
     protected ModeratorAccess(){}
 
     public ModeratorAccess(Long id, short modService, short eventService){

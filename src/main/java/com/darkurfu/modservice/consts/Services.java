@@ -1,12 +1,31 @@
 package com.darkurfu.modservice.consts;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.darkurfu.modservice.consts.exceptions.NotFindServiceException;
+import lombok.Getter;
 
-public class Services {
-    private static final HashMap<Integer, String> map = new HashMap<>(Map.of(0,"mod_service", 1,"event_service") );
+public enum Services {
+    ModService((short) 0, "ma.modService"),
+    EventService((short) 1, "ma.eventService");
 
-    static String getById(int id){
-        return map.get(id);
+
+    @Getter
+    final private short code;
+    @Getter
+    final private String dbName;
+
+
+    Services(short code, String dbName){
+        this.code = code;
+        this.dbName = dbName;
+    }
+
+    public static Services getByCode(short code) throws NotFindServiceException {
+
+        return switch (code) {
+            case (0) -> ModService;
+            case (1) -> EventService;
+            default -> throw new NotFindServiceException();
+        };
+
     }
 }

@@ -19,7 +19,5 @@ public class EventRequestService {
     private ModAccessRepository modAccessRepository;
 
 
-    public List<Moderator> getMods() {
-        return modRepository.findAll();
-    }
+
 }
