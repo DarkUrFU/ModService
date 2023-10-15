@@ -2,20 +2,23 @@ package com.darkurfu.modservice.service.bot;
 
 import com.darkurfu.modservice.consts.Services;
 import com.darkurfu.modservice.consts.exceptions.NotFindServiceException;
-import com.darkurfu.modservice.datamodels.ModeratorAccess;
-import com.darkurfu.modservice.repository.ModAccessRepository;
-import com.darkurfu.modservice.repository.ModRepository;
+import com.darkurfu.modservice.datamodels.mod.ModeratorAccess;
+import com.darkurfu.modservice.repository.mod.ModAccessRepository;
+import com.darkurfu.modservice.repository.mod.ModRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ModServiceBot {
+public class ModAccessBotService {
     @Autowired
     private ModRepository modRepository;
     @Autowired
     private ModAccessRepository modAccessRepository;
 
 
+
+    @Transactional
     public short getServiceAccessFor(Long chatId, short serviceCode) throws NotFindServiceException {
         Services service = Services.getByCode(serviceCode);
 
@@ -27,6 +30,7 @@ public class ModServiceBot {
         };
     }
 
+    @Transactional
     public ModeratorAccess getAllServiceAccessFor(Long chatId) {
         Long id = modRepository.getIdByChatId(chatId);
 

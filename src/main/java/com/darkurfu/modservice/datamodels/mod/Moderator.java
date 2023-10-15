@@ -1,4 +1,4 @@
-package com.darkurfu.modservice.datamodels;
+package com.darkurfu.modservice.datamodels.mod;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,10 +20,15 @@ public class Moderator {
 
     protected Moderator(){}
 
-    protected Moderator(Long chatId, String tgName){
+    public Moderator(Long chatId, String tgName){
         this.id = UUID.randomUUID().getMostSignificantBits();
         this.chatId = chatId;
         this.tgName = tgName;
     }
 
+    public Moderator(ModeratorInfo moderatorInfo) {
+        this.id = UUID.randomUUID().getMostSignificantBits();
+        this.chatId = moderatorInfo.getChatId();
+        this.tgName = moderatorInfo.getTgName();
+    }
 }

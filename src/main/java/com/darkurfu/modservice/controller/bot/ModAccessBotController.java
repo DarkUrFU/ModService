@@ -1,8 +1,8 @@
 package com.darkurfu.modservice.controller.bot;
 
 import com.darkurfu.modservice.consts.exceptions.NotFindServiceException;
-import com.darkurfu.modservice.datamodels.ModeratorAccess;
-import com.darkurfu.modservice.service.bot.ModServiceBot;
+import com.darkurfu.modservice.datamodels.mod.ModeratorAccess;
+import com.darkurfu.modservice.service.bot.ModAccessBotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/bot/mod")
-public class ModControllerBot {
+@RequestMapping("/api/bot/v1/mod")
+public class ModAccessBotController {
 
     @Autowired
-    private ModServiceBot modServiceBot;
+    private ModAccessBotService modAccessBotService;
 
     @GetMapping("/get_access/{chat_id}/{service}")
     ResponseEntity<Object> getAccess(
@@ -26,13 +26,15 @@ public class ModControllerBot {
         ResponseEntity<Object> responseEntity;
 
         try {
-            int access = modServiceBot.getServiceAccessFor(chatId, service);
+            int access = modAccessBotService.getServiceAccessFor(chatId, service);
 
-            responseEntity = new ResponseEntity<>(access ,HttpStatusCode.valueOf(200));
+            responseEntity = new ResponseEntity<>(access, HttpStatusCode.valueOf(200));
 
         } catch (NotFindServiceException e){
 
-            responseEntity = new ResponseEntity<>("нет такого сервиса", HttpStatusCode.valueOf(404));
+            responseEntity = new ResponseEntity<>("нет такого сервиса", HttpStatusCode.valueOf(400));
+        } catch (Exception e){
+            responseEntity = new ResponseEntity<>("пользователь не найден", HttpStatusCode.valueOf(404));
         }
 
         return responseEntity;
@@ -46,7 +48,7 @@ public class ModControllerBot {
         ResponseEntity<Object> responseEntity;
 
         try {
-            ModeratorAccess access = modServiceBot.getAllServiceAccessFor(chatId);
+            ModeratorAccess access = modAccessBotService.getAllServiceAccessFor(chatId);
 
             responseEntity = new ResponseEntity<>(access ,HttpStatusCode.valueOf(200));
 

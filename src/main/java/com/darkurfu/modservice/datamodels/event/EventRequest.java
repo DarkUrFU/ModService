@@ -1,4 +1,4 @@
-package com.darkurfu.modservice.datamodels;
+package com.darkurfu.modservice.datamodels.event;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

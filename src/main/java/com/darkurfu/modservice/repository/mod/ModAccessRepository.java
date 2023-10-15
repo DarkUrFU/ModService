@@ -1,6 +1,6 @@
-package com.darkurfu.modservice.repository;
+package com.darkurfu.modservice.repository.mod;
 
-import com.darkurfu.modservice.datamodels.ModeratorAccess;
+import com.darkurfu.modservice.datamodels.mod.ModeratorAccess;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.darkurfu.modservice.datamodels;
+package com.darkurfu.modservice.datamodels.mod;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,5 +22,11 @@ public class ModeratorAccess {
         this.id = id;
         this.modService = modService;
         this.eventService = eventService;
+    }
+
+    public ModeratorAccess(Long id, ModeratorInfo moderatorInfo) {
+        this.id = id;
+        this.modService = moderatorInfo.getModService();
+        this.eventService = moderatorInfo.getEventService();
     }
 }

@@ -22,10 +22,14 @@ repositories {
 }
 
 dependencies {
+    //implementation("org.springframework.boot:spring-boot-starter-security")
+    //implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     compileOnly("org.projectlombok:lombok")
-    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.postgresql:postgresql:42.5.1")
+
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

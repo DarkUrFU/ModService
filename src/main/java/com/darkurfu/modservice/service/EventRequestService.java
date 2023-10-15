@@ -1,13 +1,10 @@
 package com.darkurfu.modservice.service;
 
-import com.darkurfu.modservice.datamodels.Moderator;
-import com.darkurfu.modservice.repository.EventRequestRepository;
-import com.darkurfu.modservice.repository.ModAccessRepository;
-import com.darkurfu.modservice.repository.ModRepository;
+import com.darkurfu.modservice.repository.event.EventRequestRepository;
+import com.darkurfu.modservice.repository.mod.ModAccessRepository;
+import com.darkurfu.modservice.repository.mod.ModRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class EventRequestService {
