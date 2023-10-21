@@ -13,88 +13,76 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
-public class ModEditorBotService {
+public class ModInfoBotService {
 
-
-    private final ModInfoRepository modInfoRepository;
     private final ModRepository modRepository;
     private final ModAccessRepository modAccessRepository;
+    private final ModInfoRepository modInfoRepository;
     private final ModActionsRepository modActionsRepository;
 
 
     @Autowired
-    public ModEditorBotService(
-            ModInfoRepository modInfoRepository, ModRepository modRepository,
-            ModAccessRepository modAccessRepository, ModActionsRepository modActionsRepository
+    public ModInfoBotService(
+            ModRepository modRepository, ModAccessRepository modAccessRepository,
+            ModInfoRepository modInfoRepository, ModActionsRepository modActionsRepository
     ){
-        this.modInfoRepository = modInfoRepository;
         this.modRepository = modRepository;
         this.modAccessRepository = modAccessRepository;
+        this.modInfoRepository = modInfoRepository;
         this.modActionsRepository = modActionsRepository;
     }
 
 
     @Transactional
-    public void createMod(Long chatId, ModeratorInfo moderatorInfo) throws HaveNotAccessException {
+    public ModeratorInfo getModInfo(Long chatId, Long modChatID) throws HaveNotAccessException {
         Long id = modRepository.getIdByChatId(chatId);
 
         short modAccess = modAccessRepository.getAccessModServiceFor(id);
-        if (modAccess == 0){
-            //Moderator moderator = new Moderator(moderatorInfo);
-            //ModeratorAccess moderatorAccess = new ModeratorAccess(moderator.getId(), moderatorInfo);
+        if (modAccess < 2){
+            Moderator moderator = modRepository.getReferenceByChatId(modChatID);
+            ModeratorAccess moderatorAccess = modAccessRepository.getReferenceById(moderator.getId());
 
-            //modRepository.save(moderator);
-            //modAccessRepository.save(moderatorAccess);
 
-            //moderatorInfo.setId(moderator.getId());
-            modInfoRepository.save(moderatorInfo);
+            ModeratorInfo moderatorInfo = new ModeratorInfo(moderator, moderatorAccess);
 
             modActionsRepository.save(
                     new ModeratorAction(
                             id,
-                            "create moderator:\n" + moderatorInfo.toString()
+                            "get mod info:\n" + moderatorInfo.toString()
                     )
             );
-        } else {
-            throw new HaveNotAccessException();
-        }
-    }
 
-
-    @Transactional
-    public void updateModAccess(Long chatId, ModeratorAccess moderatorAccess) throws HaveNotAccessException {
-        Long id = modRepository.getIdByChatId(chatId);
-
-        short modAccess = modAccessRepository.getAccessModServiceFor(id);
-        if (modAccess == 0){
-            modAccessRepository.save(moderatorAccess);
-
-            modActionsRepository.save(
-                    new ModeratorAction(
-                            id,
-                            "update moderator:\n" + moderatorAccess.toString()
-                    )
-            );
+            return moderatorInfo;
         } else {
             throw new HaveNotAccessException();
         }
     }
 
     @Transactional
-    public void updateModInfo(Long chatId, Moderator moderator) throws HaveNotAccessException {
+    public List<ModeratorInfo> getAllModsInfo(Long chatId) throws HaveNotAccessException {
+
         Long id = modRepository.getIdByChatId(chatId);
 
         short modAccess = modAccessRepository.getAccessModServiceFor(id);
-        if (modAccess == 0){
-            modRepository.save(moderator);
+        if (modAccess < 2){
+            //Moderator moderator = modRepository.getReferenceByChatId(modChatID);
+            //ModeratorAccess moderatorAccess = modAccessRepository.getReferenceById(moderator.getId());
+
+            List<ModeratorInfo> mods = modInfoRepository.findAll();
+
+            //ModeratorInfo moderatorInfo = new ModeratorInfo(moderator, moderatorAccess);
 
             modActionsRepository.save(
                     new ModeratorAction(
                             id,
-                            "update moderator:\n" + moderator.toString()
+                            "get mod info:\n" + mods.toString()
                     )
             );
+
+            return mods;
         } else {
             throw new HaveNotAccessException();
         }

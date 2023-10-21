@@ -1,8 +1,6 @@
 package com.darkurfu.modservice.datamodels.mod;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.UUID;
@@ -11,6 +9,7 @@ import java.util.UUID;
 @Entity(name = "moderator")
 public class Moderator {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "chat_id")
@@ -21,13 +20,13 @@ public class Moderator {
     protected Moderator(){}
 
     public Moderator(Long chatId, String tgName){
-        this.id = UUID.randomUUID().getMostSignificantBits();
+        //this.id = UUID.randomUUID().getMostSignificantBits();
         this.chatId = chatId;
         this.tgName = tgName;
     }
 
     public Moderator(ModeratorInfo moderatorInfo) {
-        this.id = UUID.randomUUID().getMostSignificantBits();
+        //this.id = UUID.randomUUID().getMostSignificantBits();
         this.chatId = moderatorInfo.getChatId();
         this.tgName = moderatorInfo.getTgName();
     }

@@ -34,7 +34,7 @@ public class ModAccessBotController {
 
             responseEntity = new ResponseEntity<>("нет такого сервиса", HttpStatusCode.valueOf(400));
         } catch (Exception e){
-            responseEntity = new ResponseEntity<>("пользователь не найден", HttpStatusCode.valueOf(404));
+            responseEntity = new ResponseEntity<>(e.getMessage(), HttpStatusCode.valueOf(404));
         }
 
         return responseEntity;

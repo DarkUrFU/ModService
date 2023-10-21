@@ -7,11 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ModRepository extends JpaRepository<Moderator, Long> {
+public interface ModInfoRepository extends JpaRepository<ModeratorInfo, Long> {
 
-    @Query("select m.id from moderator m where m.chatId = ?1")
-    Long getIdByChatId(Long chatId);
-
-    @Query("select m from moderator m where m.chatId = ?1")
-    Moderator getReferenceByChatId(Long chatId);
+    ModeratorInfo getReferenceByChatId(Long chatId);
 }
