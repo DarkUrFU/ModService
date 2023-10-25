@@ -27,4 +27,9 @@ public class ModeratorAccess {
         this.modService = moderatorInfo.getModService();
         this.eventService = moderatorInfo.getEventService();
     }
+
+    public ModeratorAccess(ModeratorInfo moderatorInfo) {
+        this.modService = moderatorInfo.getModService();
+        this.eventService = moderatorInfo.getEventService();
+    }
 }

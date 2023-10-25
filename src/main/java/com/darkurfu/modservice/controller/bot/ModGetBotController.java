@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/common/v1/mod")
+@RequestMapping("/api/bot/v1/mod/get")
 public class ModGetBotController {
 
     private final ModInfoBotService modInfoBotService;
@@ -23,8 +23,14 @@ public class ModGetBotController {
     }
 
 
-
-    @GetMapping("/get_mod/{chat_id}")
+    /**
+     * Предоставляет информанию о модераторе по chatId
+     *
+     * @param chatId header
+     * @param modChatId path
+     * @return ResponseEntity<Object>
+     */
+    @GetMapping("/{chat_id}")
     ResponseEntity<Object> getMod(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String chatId,
             @PathVariable("chat_id") String modChatId
@@ -44,7 +50,13 @@ public class ModGetBotController {
         return responseEntity;
     }
 
-    @GetMapping("/get_mod")
+    /**
+     * Предоставляет информанию о всех модераторах
+     *
+     * @param chatId header
+     * @return ResponseEntity<Object>
+     */
+    @GetMapping("/")
     ResponseEntity<Object> getMods(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String chatId
     ){

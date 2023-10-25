@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/common/v1/mod/editor")
+@RequestMapping("/api/bot/v1/mod/edit")
 public class ModEditorBotController {
 
     private final ModEditorBotService modEditorBotService;
@@ -23,7 +23,13 @@ public class ModEditorBotController {
     }
 
 
-
+    /**
+     * Создаёт нового модератора
+     *
+     * @param chatId header
+     * @param moderatorInfo body
+     * @return ResponseEntity<Object>
+     */
     @PostMapping("/create")
     ResponseEntity<Object> createMod(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String chatId,
@@ -43,7 +49,13 @@ public class ModEditorBotController {
         return responseEntity;
     }
 
-
+    /**
+     * Изменяет доступ к сервисам для модератора
+     *
+     * @param chatId header
+     * @param moderatorAccess body
+     * @return ResponseEntity<Object>
+     */
     @PutMapping("/update_access")
     ResponseEntity<Object> updateModAccess(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String chatId,
@@ -64,8 +76,15 @@ public class ModEditorBotController {
         return responseEntity;
     }
 
-    @PutMapping("/update_info")
-    ResponseEntity<Object> updateModInfo(
+    /**
+     * Изменяет основную информацию о модераторе
+     *
+     * @param chatId header
+     * @param moderator body
+     * @return ResponseEntity<Object>
+     */
+    @PutMapping("/update_mod")
+    ResponseEntity<Object> updateMod(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String chatId,
             @RequestBody Moderator moderator
     ){
@@ -74,7 +93,7 @@ public class ModEditorBotController {
 
         try {
 
-            modEditorBotService.updateModInfo(Long.valueOf(chatId), moderator);
+            modEditorBotService.updateMod(Long.valueOf(chatId), moderator);
             responseEntity = new ResponseEntity<>(HttpStatusCode.valueOf(200));
 
         } catch (HaveNotAccessException e){

@@ -81,8 +81,9 @@ public class ModEditorBotService {
         }
     }
 
+
     @Transactional
-    public void updateModInfo(Long chatId, Moderator moderator) throws HaveNotAccessException {
+    public void updateMod(Long chatId, Moderator moderator) throws HaveNotAccessException {
         Long id = modRepository.getIdByChatId(chatId);
 
         short modAccess = modAccessRepository.getAccessModServiceFor(id);
