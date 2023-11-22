@@ -9,10 +9,19 @@ public class ModeratorAccess {
     @Id
     private Long id;
 
+
     @Column(name = "mod_service")
-    private short modService;
+    private Short modService;
     @Column(name = "event_service")
-    private short eventService;
+    private Short eventService;
+    @Column(name = "auth_service")
+    private Short authService;
+    @Column(name = "user_service")
+    private Short userService;
+    @Column(name = "team_service")
+    private Short teamService;
+    @Column(name = "base_service")
+    private Short baseService;
 
     protected ModeratorAccess(){}
 
