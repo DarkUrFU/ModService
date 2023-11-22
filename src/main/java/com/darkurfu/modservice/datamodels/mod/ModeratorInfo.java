@@ -10,7 +10,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "moderator")
 @SecondaryTable(name = "moderator_access", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
-//@SecondaryTable(name = "moderator_access", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 public class ModeratorInfo {
 
     @Id
@@ -26,10 +25,14 @@ public class ModeratorInfo {
     private Short modService;
     @Column(name = "event_service", table = "moderator_access", nullable=true)
     private Short eventService;
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "moderator_access", referencedColumnName = "id")
-    //private ModeratorAccess moderatorAccess;
-
+    @Column(name = "auth_service", table = "moderator_access", nullable=true)
+    private Short authService;
+    @Column(name = "user_service", table = "moderator_access", nullable=true)
+    private Short userService;
+    @Column(name = "team_service", table = "moderator_access", nullable=true)
+    private Short teamService;
+    @Column(name = "base_service", table = "moderator_access", nullable=true)
+    private Short baseService;
 
     protected ModeratorInfo(){}
 
