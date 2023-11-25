@@ -30,6 +30,7 @@ public class ModInfoInternalService {
     }
 
 
+    //@Transactional
     public ModeratorInfo getModInfo(long modID) throws Exception {
 
 
@@ -42,7 +43,7 @@ public class ModInfoInternalService {
 
     }
 
-    @Transactional
+    //@Transactional
     public List<ModeratorInfo> getAllModsInfo() {
 
 
