@@ -13,8 +13,7 @@ import java.util.UUID;
 public class ModeratorInfo {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
     @Column(name = "chat_id")
     private Long chatId;
     @Column(name = "tg_name")
@@ -37,7 +36,7 @@ public class ModeratorInfo {
     protected ModeratorInfo(){}
 
     public ModeratorInfo(Long chatId, String tgName, Short modService, Short eventService) {
-        this.id = UUID.randomUUID().getMostSignificantBits();
+        this.id = UUID.randomUUID();
         this.chatId = chatId;
         this.tgName = tgName;
         this.eventService = eventService;
@@ -45,7 +44,7 @@ public class ModeratorInfo {
         //this.moderatorAccess = moderatorAccess;
     }
 
-    public ModeratorInfo(Long id, Long chatId, String tgName, Short modService, Short eventService) {
+    public ModeratorInfo(UUID id, Long chatId, String tgName, Short modService, Short eventService) {
         this.id = id;
         this.chatId = chatId;
         this.tgName = tgName;

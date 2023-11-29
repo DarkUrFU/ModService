@@ -58,13 +58,13 @@ public class ModGetBotController {
      */
     @GetMapping("/")
     ResponseEntity<Object> getMods(
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String chatId
+            @RequestHeader(HttpHeaders.AUTHORIZATION) Long chatId
     ){
         ResponseEntity<Object> responseEntity;
 
         try {
 
-            List<ModeratorInfo> moderatorInfo = modInfoBotService.getAllModsInfo(Long.parseLong(chatId));
+            List<ModeratorInfo> moderatorInfo = modInfoBotService.getAllModsInfo(chatId);
 
             responseEntity = new ResponseEntity<>(moderatorInfo ,HttpStatusCode.valueOf(200));
 

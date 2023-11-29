@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 public class ModEditorBotService {
 
@@ -37,7 +39,7 @@ public class ModEditorBotService {
 
     @Transactional
     public void createMod(Long chatId, ModeratorInfo moderatorInfo) throws HaveNotAccessException {
-        Long id = modRepository.getIdByChatId(chatId);
+        UUID id = modRepository.getIdByChatId(chatId);
 
         short modAccess = modAccessRepository.getAccessModServiceFor(id);
         if (modAccess == 0){
@@ -64,7 +66,7 @@ public class ModEditorBotService {
 
     @Transactional
     public void updateModAccess(Long chatId, ModeratorAccess moderatorAccess) throws HaveNotAccessException {
-        Long id = modRepository.getIdByChatId(chatId);
+        UUID id = modRepository.getIdByChatId(chatId);
 
         short modAccess = modAccessRepository.getAccessModServiceFor(id);
         if (modAccess == 0){
@@ -84,7 +86,7 @@ public class ModEditorBotService {
 
     @Transactional
     public void updateMod(Long chatId, Moderator moderator) throws HaveNotAccessException {
-        Long id = modRepository.getIdByChatId(chatId);
+        UUID id = modRepository.getIdByChatId(chatId);
 
         short modAccess = modAccessRepository.getAccessModServiceFor(id);
         if (modAccess == 0){

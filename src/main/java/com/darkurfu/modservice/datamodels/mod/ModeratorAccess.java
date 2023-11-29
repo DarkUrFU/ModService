@@ -3,11 +3,13 @@ package com.darkurfu.modservice.datamodels.mod;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Entity(name = "moderator_access")
 public class ModeratorAccess {
     @Id
-    private Long id;
+    private UUID id;
 
 
     @Column(name = "mod_service")
@@ -25,13 +27,13 @@ public class ModeratorAccess {
 
     protected ModeratorAccess(){}
 
-    public ModeratorAccess(Long id, short modService, short eventService){
+    public ModeratorAccess(UUID id, short modService, short eventService){
         this.id = id;
         this.modService = modService;
         this.eventService = eventService;
     }
 
-    public ModeratorAccess(Long id, ModeratorInfo moderatorInfo) {
+    public ModeratorAccess(UUID id, ModeratorInfo moderatorInfo) {
         this.id = id;
         this.modService = moderatorInfo.getModService();
         this.eventService = moderatorInfo.getEventService();

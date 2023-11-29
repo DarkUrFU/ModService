@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 public class ModAccessWebService {
     @Autowired
@@ -21,7 +23,7 @@ public class ModAccessWebService {
     }
 
     @Transactional
-    public short getServiceAccessFor(Long id, short serviceCode) throws NotFindServiceException {
+    public short getServiceAccessFor(UUID id, short serviceCode) throws NotFindServiceException {
         Services service = Services.getByCode(serviceCode);
 
         return switch (service){
@@ -32,7 +34,7 @@ public class ModAccessWebService {
 
 
     @Transactional
-    public ModeratorAccess getAllServiceAccessFor(Long id) {
+    public ModeratorAccess getAllServiceAccessFor(UUID id) {
         return modAccessRepository.getReferenceById(id);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/web/v1/mod")
 public class ModAccessWebController {
@@ -17,13 +19,13 @@ public class ModAccessWebController {
 
     @GetMapping("/get_access/{id}/{service}")
     ResponseEntity<Object> getAccess(
-            @PathVariable("id") Long id,
+            @PathVariable("id") String id,
             @PathVariable short service
     ){
         ResponseEntity<Object> responseEntity;
 
         try {
-            int access = modAccessWebService.getServiceAccessFor(id, service);
+            int access = modAccessWebService.getServiceAccessFor(UUID.fromString(id), service);
 
             responseEntity = new ResponseEntity<>(access ,HttpStatusCode.valueOf(200));
 
@@ -39,12 +41,12 @@ public class ModAccessWebController {
 
     @GetMapping("/get_access/{id}")
     ResponseEntity<Object> getAllAccess(
-            @PathVariable("id") Long id
+            @PathVariable("id") String id
     ){
         ResponseEntity<Object> responseEntity;
 
         try {
-            ModeratorAccess access = modAccessWebService.getAllServiceAccessFor(id);
+            ModeratorAccess access = modAccessWebService.getAllServiceAccessFor(UUID.fromString(id));
 
             responseEntity = new ResponseEntity<>(access ,HttpStatusCode.valueOf(200));
 

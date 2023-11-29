@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ModInfoBotService {
@@ -37,8 +38,8 @@ public class ModInfoBotService {
 
 
     @Transactional
-    public ModeratorInfo getModInfo(Long chatId, Long modChatID) throws HaveNotAccessException {
-        Long id = modRepository.getIdByChatId(chatId);
+    public ModeratorInfo getModInfo(long chatId, Long modChatID) throws HaveNotAccessException {
+        UUID id = modRepository.getIdByChatId(chatId);
 
         short modAccess = modAccessRepository.getAccessModServiceFor(id);
         if (modAccess < 2){
@@ -62,9 +63,8 @@ public class ModInfoBotService {
     }
 
     @Transactional
-    public List<ModeratorInfo> getAllModsInfo(Long chatId) throws HaveNotAccessException {
-
-        Long id = modRepository.getIdByChatId(chatId);
+    public List<ModeratorInfo> getAllModsInfo(long chatId) throws HaveNotAccessException {
+        UUID id = modRepository.getIdByChatId(chatId);
 
         short modAccess = modAccessRepository.getAccessModServiceFor(id);
         if (modAccess < 2){

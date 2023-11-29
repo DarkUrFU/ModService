@@ -6,12 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface ModRepository extends JpaRepository<Moderator, Long> {
+public interface ModRepository extends JpaRepository<Moderator, UUID> {
 
     @Query("select m.id from moderator m where m.chatId = ?1")
-    Long getIdByChatId(Long chatId);
+    UUID getIdByChatId(long chatId);
 
     @Query("select m from moderator m where m.chatId = ?1")
-    Moderator getReferenceByChatId(Long chatId);
+    Moderator getReferenceByChatId(long chatId);
 }

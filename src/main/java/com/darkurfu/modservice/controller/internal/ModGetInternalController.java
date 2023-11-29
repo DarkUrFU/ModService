@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/internal/v1/mod/get")
@@ -32,13 +33,13 @@ public class ModGetInternalController {
      */
     @GetMapping("/{id}")
     ResponseEntity<Object> getMod(
-            @PathVariable("id") Long modId
+            @PathVariable("id") String modId
             ){
         ResponseEntity<Object> responseEntity;
 
         try {
 
-            ModeratorInfo moderatorInfo = modInfoInternalService.getModInfo(modId);
+            ModeratorInfo moderatorInfo = modInfoInternalService.getModInfo(UUID.fromString(modId));
 
             responseEntity = new ResponseEntity<>(moderatorInfo, HttpStatusCode.valueOf(200));
 

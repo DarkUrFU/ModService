@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ModInfoInternalService {
@@ -31,7 +32,7 @@ public class ModInfoInternalService {
 
 
     //@Transactional
-    public ModeratorInfo getModInfo(long modID) throws Exception {
+    public ModeratorInfo getModInfo(UUID modID) throws Exception {
 
 
         Optional<ModeratorInfo> moderatorInfo = modInfoRepository.findById(modID);
